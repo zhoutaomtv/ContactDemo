@@ -3,5 +3,15 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/appengine-api-1.0-sdk-1.5.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/appengine-api-labs-1.5.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/appengine-jsr107cache-1.5.0.1.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/datanucleus-appengine-1.0.8.final.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/datanucleus-core-1.1.5.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/datanucleus-jpa-1.1.5.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/geronimo-jpa_3.0_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/jdo2-api-2.3-eb.jar"/>
+	<classpathentry kind="lib" path="D:/Work/workspace/contactdemo/shared/jsr107cache-1.1.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
