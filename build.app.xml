@@ -1,11 +1,7 @@
-<project default="runserver" basedir=".">
+<project>
 	<property name="sdk.dir" location="D:\share\java\appengine-java-sdk-1.5.0.1" />
 
 	<import file="${sdk.dir}/config/user/ant-macros.xml" />
-	
-	<property name="root" location="." />
-	<property name="name" location="contactdemo" />
-	<property name="tomcat.home" location="D:\share\java\apache-tomcat-7.0.16" />
 
 	<path id="project.classpath">
 		<pathelement path="war/WEB-INF/classes" />
@@ -41,29 +37,10 @@
 		description="Performs JDO enhancement on compiled data classes.">
 		<enhance_war war="war" />
 	</target>
-	
-	<target name="buildWar" depends="datanucleusenhance"
-		description="Create one war package.">
-		<war war="war" />
-		<war warfile="${root}/${name}.war" webxml="${root}/war/WEB-INF/web.xml">
-		    <lib dir="${root}/war/WEB-INF/lib"/>
-		    <classes dir = "${root}/war/WEB-INF/classes"/>
-		    <fileset dir="${root}/war">
-		    </fileset>
-		</war> 
-	</target>
-	
-	<target name="publish" depends="buildWar">
-	   <copy todir="${tomcat.home}/webapps">
-	    <fileset dir="${root}" >
-	     <include name="**/*.war"/>
-	    </fileset>
-	   </copy>	 
-	</target>
 
-	<target name="runserver" depends="publish"
+	<target name="runserver" depends="datanucleusenhance"
 		description="Starts the development server.">
-		<exec executable="startup.bat"  failonerror="false" dir="${tomcat.home}\bin" />
+		<dev_appserver war="war" />
 	</target>
 
 	<target name="update" depends="datanucleusenhance"
