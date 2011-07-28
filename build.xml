@@ -4,7 +4,7 @@
 	<import file="${sdk.dir}/config/user/ant-macros.xml" />
 	
 	<property name="root" location="." />
-	<property name="name" location="contactdemo" />
+	<property name="app.name" location="contactdemo" />
 	<property name="tomcat.home" location="D:\share\java\apache-tomcat-7.0.16" />
 
 	<path id="project.classpath">
@@ -18,6 +18,11 @@
 	</path>
 
 	<target name="copyjars" description="Copies the App Engine JARs to the WAR.">
+		<copy todir="war/WEB-INF/lib" flatten="true">
+			<fileset dir="shared">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
 		<copy todir="war/WEB-INF/lib" flatten="true">
 			<fileset dir="${sdk.dir}/lib/user">
 				<include name="**/*.jar" />
@@ -44,10 +49,7 @@
 	
 	<target name="buildWar" depends="datanucleusenhance"
 		description="Create one war package.">
-		<war war="war" />
-		<war warfile="${root}/${name}.war" webxml="${root}/war/WEB-INF/web.xml">
-		    <lib dir="${root}/war/WEB-INF/lib"/>
-		    <classes dir = "${root}/war/WEB-INF/classes"/>
+		<war warfile="${root}/contactdemo.war" webxml="${root}/war/WEB-INF/web.xml">
 		    <fileset dir="${root}/war">
 		    </fileset>
 		</war> 
@@ -63,7 +65,17 @@
 
 	<target name="runserver" depends="publish"
 		description="Starts the development server.">
-		<exec executable="startup.bat"  failonerror="false" dir="${tomcat.home}\bin" />
+		<exec executable="${tomcat.home}/bin/startup.bat" spawn="true" vmlauncher="false">  
+		   <env key="CATALINA_HOME" value="${tomcat.home}" />  
+		   <arg line="/c start ${tomcat.home}/bin/startup.bat" />  
+		</exec>
+	</target>
+
+	<target name="tomcat.stop">
+		<exec executable="cmd " dir="${tomcat.home}/bin" spawn="true">  
+		   <arg value="/c" />  
+		   <arg value="shutdown.bat" />  
+		</exec>
 	</target>
 
 	<target name="update" depends="datanucleusenhance"
