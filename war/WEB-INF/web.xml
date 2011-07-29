@@ -10,14 +10,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>com.struts2.gae.listener.OgnlListener</listener-class>
+	</listener>
 
 	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<filter-name>struts2-gae</filter-name>
+		<filter-class>com.struts2.gae.dispatcher.GaeFilterDispatcher</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>struts2</filter-name>
+		<filter-name>struts2-gae</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 

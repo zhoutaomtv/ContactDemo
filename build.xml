@@ -3,9 +3,9 @@
 
 	<import file="${sdk.dir}/config/user/ant-macros.xml" />
 	
-	<property name="root" location="." />
-	<property name="app.name" location="contactdemo" />
+	<property name="root" location="." />	
 	<property name="tomcat.home" location="D:\share\java\apache-tomcat-7.0.16" />
+	<property name="app.name" value="contactdemo" />
 
 	<path id="project.classpath">
 		<pathelement path="war/WEB-INF/classes" />
@@ -49,18 +49,23 @@
 	
 	<target name="buildWar" depends="datanucleusenhance"
 		description="Create one war package.">
-		<war warfile="${root}/contactdemo.war" webxml="${root}/war/WEB-INF/web.xml">
+		<delete file="${app.name}.war" />
+		<war warfile="${root}/${app.name}.war" webxml="${root}/war/WEB-INF/web.xml">
 		    <fileset dir="${root}/war">
 		    </fileset>
 		</war> 
 	</target>
 	
 	<target name="publish" depends="buildWar">
-	   <copy todir="${tomcat.home}/webapps">
-	    <fileset dir="${root}" >
-	     <include name="**/*.war"/>
-	    </fileset>
-	   </copy>	 
+		<antcall target="tomcat.stop" >
+		</antcall>
+		<delete dir="${tomcat.home}/webapps/${app.name}"/>
+		<delete file="${tomcat.home}/webapps/${app.name}.war"/>		
+		<copy todir="${tomcat.home}/webapps">
+	    	<fileset dir="${root}" >
+	     		<include name="**/*.war"/>
+	    	</fileset>
+		</copy>
 	</target>
 
 	<target name="runserver" depends="publish"
@@ -76,6 +81,7 @@
 		   <arg value="/c" />  
 		   <arg value="shutdown.bat" />  
 		</exec>
+		<sleep seconds="5"/>
 	</target>
 
 	<target name="update" depends="datanucleusenhance"

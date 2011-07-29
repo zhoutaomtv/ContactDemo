@@ -13,7 +13,7 @@
 		   http://www.springframework.org/schema/context     
 		   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<import resource="services.xml" />
+	<!-- <import resource="services.xml" /> -->
 
 	<bean id="test" class="test">
 		<!-- collaborators and configuration for this bean go here -->
